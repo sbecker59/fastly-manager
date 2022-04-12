@@ -49,7 +49,7 @@ jobs:
         id: cpr
         uses: peter-evans/create-pull-request@v4
         with:
-          base: pull-request-issue-${{ github.event.issue.number }}
+          base: main
 
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v2
