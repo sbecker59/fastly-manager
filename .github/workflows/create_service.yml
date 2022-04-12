@@ -36,20 +36,20 @@ jobs:
         uses: canastro/copy-file-action@master
         with:
           source: "template.tfvars"
-          target: "{{ github.event.issue.number }}.tfvars"
+          target: "${{ github.event.issue.number }}.tfvars"
 
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
         with:
-          message: 'Issue {{ github.event.issue.number }}: {{ github.event.issue.title }}'
+          message: 'Issue ${{ github.event.issue.number }}: ${{ github.event.issue.title }}'
           add: '*.tfvars'
-          new_branch: pull-request-issue-{{ github.event.issue.number }}
+          new_branch: pull-request-issue-${{ github.event.issue.number }}
 
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v4
         with:
-          branch: pull-request-issue-{{ github.event.issue.number }}
+          branch: pull-request-issue-${{ github.event.issue.number }}
           delete-branch: true
 
       - name: Create comment
