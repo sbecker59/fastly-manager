@@ -50,7 +50,6 @@ jobs:
         uses: peter-evans/create-pull-request@v4
         with:
           base: pull-request-issue-${{ github.event.issue.number }}
-          branch: main
 
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v2
