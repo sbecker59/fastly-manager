@@ -32,6 +32,12 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
 
+      - name: copy file
+        uses: canastro/copy-file-action@master
+        with:
+          source: "template.tfvars"
+          target: "{{ github.event.issue.number }}.tfvars"
+
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
         with:
