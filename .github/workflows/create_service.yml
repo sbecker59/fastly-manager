@@ -49,6 +49,7 @@ jobs:
         id: cpr
         uses: peter-evans/create-pull-request@v4
         with:
+          base: main
           branch: pull-request-issue-${{ github.event.issue.number }}
           delete-branch: true
 
