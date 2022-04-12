@@ -31,3 +31,25 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: 'Issue {{ github.event.issue.number }}: {{ github.event.issue.title }}'
+          add: '*.tfvars'
+          new_branch: pull-request-issue-{{ github.event.issue.number }}
+
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v4
+        with:
+          branch: pull-request-issue-{{ github.event.issue.number }}
+          delete-branch: true
+
+      - name: Create comment
+        uses: peter-evans/create-or-update-comment@v2
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            ${{ steps.cpr.outputs.pull-request-number}}
+          reactions: '+1'
