@@ -49,14 +49,13 @@ jobs:
         id: cpr
         uses: peter-evans/create-pull-request@v4
         with:
-          base: main
-          branch: pull-request-issue-${{ github.event.issue.number }}
-          delete-branch: true
+          base: pull-request-issue-${{ github.event.issue.number }}
+          branch: main
 
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v2
         with:
           issue-number: ${{ github.event.issue.number }}
           body: |
-            ${{ steps.cpr.outputs.pull-request-number}}
+            Pull Request - ${{ steps.cpr.outputs.pull-request-number}}
           reactions: '+1'
